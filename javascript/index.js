@@ -1,3 +1,5 @@
+const Chronometer = require("./chronometer");
+
 const chronometer = new Chronometer();
 
 // get the buttons:
@@ -15,10 +17,15 @@ const splitsElement = document.getElementById('splits');
 
 function printTime() {
   // ... your code goes here
+printMinutes();
+printSeconds()
 }
 
 function printMinutes() {
   // ... your code goes here
+  const minutes = chronometer.computeTwoDigitNumber(chronometer.getMinutes)
+  minDecElement.textContent = minutes[0]
+  minUniElement.textContent = minutes[1]
 }
 
 function printSeconds() {
@@ -40,6 +47,9 @@ function clearSplits() {
 
 function setStopBtn() {
   // ... your code goes here
+  btnLeftElement.classList.remove("start");
+  btnLeftElement.classList.add("stop");
+  // chronometer.start();
 }
 
 function setSplitBtn() {
@@ -48,18 +58,31 @@ function setSplitBtn() {
 
 function setStartBtn() {
   // ... your code goes here
+  btnLeftElement.classList.remove("stop");
+  btnLeftElement.classList.add("start");
+  chronometer.stop();
 }
 
 function setResetBtn() {
   // ... your code goes here
+
 }
 
 // Start/Stop Button
 btnLeftElement.addEventListener('click', () => {
   // ... your code goes here
-});
+if (btnLeftElement.classList.contains('start'))setStopBtn();
+else if (btnLeftElement.classList.contains('stop'))setStartBtn();
+})
 
 // Reset/Split Button
 btnRightElement.addEventListener('click', () => {
   // ... your code goes here
+  if (btnRightElement.classList.contains('reset'))setResetBtn();
+  else if (btnRightElement.classList.contains('split'))setSplitBtn();
 });
+  
+// After adding buttons properties, only the
+// color of the start button changed from green to red.
+// then after adding some codes, nothing 
+// worked anymore !!
