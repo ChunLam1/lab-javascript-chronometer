@@ -1,4 +1,4 @@
-const Chronometer = require("./chronometer");
+// const Chronometer = require("./chronometer");
 
 const chronometer = new Chronometer();
 
@@ -18,18 +18,24 @@ const splitsElement = document.getElementById('splits');
 function printTime() {
   // ... your code goes here
 printMinutes();
-printSeconds()
+printSeconds();
+// setInterval(() => {
+  
+// }, interval);
 }
 
 function printMinutes() {
   // ... your code goes here
-  const minutes = chronometer.computeTwoDigitNumber(chronometer.getMinutes)
-  minDecElement.textContent = minutes[0]
-  minUniElement.textContent = minutes[1]
+  const minutes = chronometer.computeTwoDigitNumber(chronometer.getMinutes());
+  minDecElement.textContent = minutes[0];
+  minUniElement.textContent = minutes[1];
 }
 
 function printSeconds() {
   // ... your code goes here
+  const secondes = chronometer.computeTwoDigitNumber(chronometer.getSeconds());
+ secDecElement.textContent = secondes[0];
+ secUniElement.textContent = secondes[1];
 }
 
 // ==> BONUS
@@ -49,40 +55,47 @@ function setStopBtn() {
   // ... your code goes here
   btnLeftElement.classList.remove("start");
   btnLeftElement.classList.add("stop");
-  // chronometer.start();
+  btnLeftElement.textContent="STOP";
+  chronometer.start(printTime);
 }
 
 function setSplitBtn() {
   // ... your code goes here
+btnRightElement.classList.remove("reset");
+btnRightElement.classList.add("split");
+btnRightElement.textContent ="SPLIT";
 }
 
 function setStartBtn() {
   // ... your code goes here
   btnLeftElement.classList.remove("stop");
   btnLeftElement.classList.add("start");
+  btnLeftElement.textContent="START";
   chronometer.stop();
 }
 
 function setResetBtn() {
   // ... your code goes here
-
+btnRightElement.classList.remove("split");
+btnRightElement.classList.add("reset");
+btnRightElement.textContent ="RESET";
 }
 
 // Start/Stop Button
 btnLeftElement.addEventListener('click', () => {
   // ... your code goes here
-if (btnLeftElement.classList.contains('start'))setStopBtn();
-else if (btnLeftElement.classList.contains('stop'))setStartBtn();
+if (btnLeftElement.classList.contains('start')){
+  setStopBtn();
+  setSplitBtn();
+} else {
+  setStartBtn();
+  setResetBtn();
+}
 })
 
 // Reset/Split Button
 btnRightElement.addEventListener('click', () => {
   // ... your code goes here
-  if (btnRightElement.classList.contains('reset'))setResetBtn();
-  else if (btnRightElement.classList.contains('split'))setSplitBtn();
+  // if (btnRightElement.classList.contains('reset'))
+  // else if (btnRightElement.classList.contains('split'))
 });
-  
-// After adding buttons properties, only the
-// color of the start button changed from green to red.
-// then after adding some codes, nothing 
-// worked anymore !!
